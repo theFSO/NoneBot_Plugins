@@ -3,6 +3,8 @@ from nonebot import on_natural_language, NLPSession, IntentCommand
 from nonebot.log import logger
 from nonebot.message import MessageSegment, Message
 
+from . import plugin_config
+
 import json
 import requests
 import os.path
@@ -49,7 +51,7 @@ async def get_idh(name: str) -> str:
 			return "未查询到角色 / ESI未响应"
 		charID = char['characters'][0]['id']
 		
-		picurl = "https://image.evepc.163.com/Character/{}_128.jpg".format(str(charID))
+		picurl = "https://image.evepc.163.com/Character/{}_256.jpg".format(str(charID))
 		
 		
 		url = "https://esi.evepc.163.com/latest/characters/{}/corporationhistory/?datasource=serenity".format(str(charID))

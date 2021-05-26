@@ -15,3 +15,13 @@ def sql_execute(sql):
 	cursor.close()
 	db.close()
 	return content
+
+def sqlite_exec(name,command):
+	base_dir=os.path.dirname(os.path.abspath(__file__))
+	db_path=os.path.join(base_dir, 'db', name)
+	db = sqlite3.connect(db_path)
+	cs=db.execute('''{}'''.format(command))
+	res = cs.fetchall()
+	db.commit()
+	db.close()
+	return res
