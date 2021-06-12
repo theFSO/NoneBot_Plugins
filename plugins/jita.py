@@ -73,7 +73,11 @@ async def get_wuping(name: str) -> str:
             return "猪不要钱免费送"
 
         else:
-            d = sql_exec.sql_execute('SELECT typeID FROM nameandid WHERE name = "{}"'.format(name))
+
+            if "%" in name:
+                d = sql_exec.sql_execute('SELECT typeID FROM nameandid WHERE name LIKE "{}" LIMIT 5'.format(name))
+            else:
+                d = sql_exec.sql_execute('SELECT typeID FROM nameandid WHERE name = "{}"'.format(name))
             if d == []:
                 c = sql_exec.sql_execute('SELECT * FROM nameandid WHERE name LIKE "%{}%" LIMIT 5'.format(name))
                 if c == []:
